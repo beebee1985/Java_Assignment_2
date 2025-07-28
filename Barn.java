@@ -6,11 +6,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-/**
- * Barn class - Main class that manages animals in the barn
- * This class demonstrates inheritance by working with different animal types
- * Includes bonus features: names, sorting, and statistics
- */
+
 public class Barn {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -19,9 +15,8 @@ public class Barn {
 
         System.out.print("How many animals in the barn? ");
         int numAnimals = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
 
-        // Input phase - collect information about each animal
         for (int i = 1; i <= numAnimals; i++) {
             System.out.print("Enter animal #" + i + " type (cow/chicken): ");
             String animalType = scanner.nextLine().toLowerCase().trim();
@@ -31,7 +26,7 @@ public class Barn {
                 String name = scanner.nextLine();
                 System.out.print("Enter milk per day for cow: ");
                 int milkPerDay = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
+                scanner.nextLine();
 
                 Cow cow = new Cow(name, milkPerDay);
                 cows.add(cow);
@@ -47,18 +42,15 @@ public class Barn {
 
             } else {
                 System.out.println("Invalid animal type. Please enter 'cow' or 'chicken'.");
-                i--; // Decrement counter to retry this animal
+                i--;
             }
         }
 
-        // BONUS CHALLENGE 2: Sort animals alphabetically by name
         Collections.sort(cows, Comparator.comparing(Animal::getName));
         Collections.sort(chickens, Comparator.comparing(Animal::getName));
 
-        // Output phase - display all animals
         System.out.println();
 
-        // Display all cows
         if (!cows.isEmpty()) {
             System.out.println("--- All Cows (sorted by name) ---");
             for (Cow cow : cows) {
@@ -68,7 +60,6 @@ public class Barn {
             System.out.println();
         }
 
-        // Display all chickens
         if (!chickens.isEmpty()) {
             System.out.println("--- All Chickens (sorted by name) ---");
             for (Chicken chicken : chickens) {
@@ -78,22 +69,14 @@ public class Barn {
             System.out.println();
         }
 
-        // BONUS CHALLENGE 3: Statistics
         displayStatistics(cows, chickens);
 
         scanner.close();
     }
 
-    /**
-     * Display statistics for the barn animals
-     * 
-     * @param cows     List of cows in the barn
-     * @param chickens List of chickens in the barn
-     */
     private static void displayStatistics(ArrayList<Cow> cows, ArrayList<Chicken> chickens) {
         System.out.println("--- Barn Statistics ---");
 
-        // Total milk production from all cows
         if (!cows.isEmpty()) {
             int totalMilk = 0;
             for (Cow cow : cows) {
@@ -102,7 +85,6 @@ public class Barn {
             System.out.println("Total milk production per day: " + totalMilk + "L from " + cows.size() + " cow(s)");
         }
 
-        // Unique egg colors from all chickens
         if (!chickens.isEmpty()) {
             Set<String> uniqueEggColors = new HashSet<>();
             for (Chicken chicken : chickens) {
